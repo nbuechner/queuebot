@@ -1,0 +1,14 @@
+id: com.ubuntu.qbot
+version: 1.0.1
+modules:
+- queuebot
+main_class: Queuebot
+maubot: 0.1.0
+database: false
+config: true
+webapp: false
+license: MIT
+extra_files:
+- base-config.yaml
+dependencies: []
+soft_dependencies: []

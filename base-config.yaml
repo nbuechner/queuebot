@@ -1,0 +1,21 @@
+update_interval: 5
+whitelist:
+- '@ravage:xentonix.net'
+rooms:
+    '#release:ubuntu.com':
+        queue: [New, Unapproved]
+        tracker: Builds
+        packageset: Packageset
+        mute: []
+    '#lubuntu-devel:ubuntu.com':
+        tracker: Builds
+        tracker_filter: lubuntu
+        queue: [New, Unapproved]
+        queue_filter: lubuntu
+        packageset: Packageset
+        packageset_filter: lubuntu
+        mute: []
+    '#queuebot:xentonix.net':
+        queue: [Unapproved]
+        packageset: Packageset
+        mute: []

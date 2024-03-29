@@ -1,0 +1,6 @@
+venv
+*.mbp
+*.db
+*.log
+plugins/*
+config.yaml
