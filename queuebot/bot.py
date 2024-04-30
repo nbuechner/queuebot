@@ -45,9 +45,9 @@ class Queuebot(Plugin):
     self.config.load_and_update()
     self.flood_protection = FloodProtection()
     self.power_level_cache = {}
-    #logger = logging.getLogger(self.id)
-    #logger.setLevel(logging.INFO)
-    #self.log = logger
+    logger = logging.getLogger(self.id)
+    logger.setLevel(logging.DEBUG)
+    self.log = logger
     if await self.resolve_room_aliases():
         self.poll_task = asyncio.create_task(self.poll_plugins())
         self.log.info("Queuebot started")
@@ -204,6 +204,7 @@ class Queuebot(Plugin):
                 continue
             notices = plugin_name.update()
             self.log.debug('update() function called on ' + str(plugin_name.name) + '.' + str(plugin_name.queue))
+            sent_count = 0
             if notices:
                     self.log.debug(f"New notices available")
                     if await self.resolve_room_aliases():
@@ -215,7 +216,15 @@ class Queuebot(Plugin):
                                     self.log.debug(f"Checking notices or {room_alias}  ( {room_id} )")
                                     if self.check_plugin_filter_mute(plugin_name=plugin_name.name,queue=plugin_name.queue, notice=notice[0], room_id=room_id, room_alias=room_alias):
                                         self.log.debug(f"new notice from {plugin_name.name}.{plugin_name.queue} to {room_alias}")
-                                        await self.client.send_notice(room_id, notice[0])
+                                        self.log.debug(f"sent count: {sent_count}")
+                                        if sent_count >= 5:
+                                            self.log.debug(f"sent count reached: {sent_count} sleeping 60 secs")
+                                            if await asyncio.sleep(60):
+                                                sent_count = 0
+                                                await self.client.send_notice(room_id, notice[0])
+                                        else:
+                                            await self.client.send_notice(room_id, notice[0])
+                                        sent_count += 1
                                 except Exception as e:
                                     self.log.debug(f"Error sending notice to {room_id}: {e}")
                                     self.log.debug(traceback.format_exc())
