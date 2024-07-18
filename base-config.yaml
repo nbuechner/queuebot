@@ -2,20 +2,20 @@ update_interval: 5
 whitelist:
 - '@ravage:xentonix.net'
 rooms:
-    '#release:ubuntu.com':
-        queue: [New, Unapproved]
-        tracker: Builds
-        packageset: Packageset
-        mute: []
-    '#lubuntu-devel:ubuntu.com':
-        tracker: Builds
-        tracker_filter: lubuntu
-        queue: [New, Unapproved]
-        queue_filter: lubuntu
-        packageset: Packageset
-        packageset_filter: lubuntu
-        mute: []
-    '#queuebot:xentonix.net':
-        queue: [Unapproved]
-        packageset: Packageset
-        mute: []
+    '!XBHBxuegpdVZEJBOIh:xentonix.net':
+        #maubot test room
+        member_level: 50
+        nomember_level: 0
+        launchpad_groups: [matrix-council]
+        remove_permissions: yes
+        enabled: yes
+        use_socials: yes
+    '!SqVwRMDWgHlUMdMGzk:ubuntu.com':
+        #read-only-test:ubuntu.com
+        member_level: 1
+        nomember_level: 0
+        launchpad_groups: [read-only-trusted, matrix-council]
+        remove_permissions: no
+        use_socials: no
+        enabled: yes
+

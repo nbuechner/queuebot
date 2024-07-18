@@ -1,8 +1,8 @@
-id: com.ubuntu.qbot
-version: 1.0.1
+id: com.ubuntu.roomadmin
+version: 0.0.4
 modules:
-- queuebot
-main_class: Queuebot
+- roomadmin
+main_class: Roomadmin
 maubot: 0.1.0
 database: false
 config: true
